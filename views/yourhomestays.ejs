@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../assets/css/all.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.css">
+  <!-- Custom -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <title>BT Real Estate</title>
+</head>
+
+<body>
+  <!-- Top Bar -->
+  <section id="top-bar" class="p-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <i class="fas fa-phone"></i> (617)-555-5555
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-envelope-open"></i> contact@hbhomestay.com
+        </div>
+        <div class="col-md-4">
+          <div class="social text-right">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-pinterest"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../home">
+        <img src="../assets/img/logo.png" class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li class="nav-item active mr-3">
+            <a class="nav-link" href="../home">Home</a>
+          </li>
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="listings.html">Featured Listings</a>
+          </li>
+          <% if (user.role == "homestay owner") { %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Manage Homestay
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="../homestays/new">New Homestay</a>
+                <a class="dropdown-item" href="/homestays/yourhomestays">Your Homestays</a>
+            </li>
+          <% } %>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="../logout">
+              <i class="fas fa-user-plus"></i> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Listings -->
+  <section id="listings" class="py-5">
+    <div class="container">
+      <h3 class="text-center mb-3">Homestay Listings</h3>
+      <div class="row">
+        <%for (var homestay of homestays) { %>
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card listing-preview">
+            <img class="card-img-top" src="../assets/img/homes/home-1.jpg" alt="">
+            <div class="card-img-overlay">
+              <h2>
+                <span class="badge badge-secondary text-white"><%= homestay.price %></span>
+              </h2>
+            </div>
+            <div class="card-body">
+              <div class="listing-heading text-center">
+                <h4 class="text-primary"><%= homestay.name %></h4>
+                <p>
+                  <i class="fas fa-map-marker text-secondary"></i><%= homestay.city %></p>
+              </div>
+              <hr>
+              <div class="row py-2 text-secondary">
+                <div class="col-12">
+                  <i class="fas fa-th-large"></i> Address: <%= homestay.address %></div>
+              </div>
+              <div class="row py-2 text-secondary">
+                <div class="col-12">
+                  <i class="fas fa-bed"></i> People: <%= homestay.people %></div>
+              </div>
+              <hr>
+              <hr>
+              <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+            </div>
+          </div>
+        </div>
+        <% } %>
+    </div>
+    </div>
+
+  </section>
+
+  <section id="services" class="py-5 bg-secondary text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <i class="fas fa-comment fa-4x mr-4"></i>
+          <hr>
+          <h3>Consulting Services</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-home fa-4x mr-4"></i>
+          <hr>
+          <h3>Propery Management</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-suitcase fa-4x mr-4"></i>
+          <hr>
+          <h3>Renting & Selling</h3>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="main-footer" class="py-4 bg-primary text-white text-center">
+    Copyright &copy;
+    <span class="year"></span> HB Homestay
+  </footer>
+
+  <script src="../assets/js/jquery-3.3.1.min.js "></script>
+  <script src="../assets/js/bootstrap.bundle.min.js "></script>
+  <script src="../assets/js/main.js "></script>
+</body>
+
+</html>
