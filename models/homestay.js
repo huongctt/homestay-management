@@ -5,7 +5,7 @@ const Schema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imagePost: [{
+    images: [{
         type: Buffer
     }],
     owner: {
@@ -31,6 +31,9 @@ const Schema = new mongoose.Schema({
     people: {
         type: String,
         required: true
+    },
+    pool: {
+        type: Boolean
     }
 },{
     timestamps: true

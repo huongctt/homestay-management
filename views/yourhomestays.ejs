@@ -12,7 +12,7 @@
   <!-- Custom -->
   <link rel="stylesheet" href="../assets/css/style.css">
 
-  <title>BT Real Estate</title>
+  <title>Hb Homestay</title>
 </head>
 
 <body>
@@ -100,7 +100,7 @@
         <%for (var homestay of homestays) { %>
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="card listing-preview">
-            <img class="card-img-top" src="../assets/img/homes/home-1.jpg" alt="">
+            <img class="card-img-top" src="../homestays/<%=homestay.id%>/images?index=0" alt="">
             <div class="card-img-overlay">
               <h2>
                 <span class="badge badge-secondary text-white"><%= homestay.price %></span>
@@ -108,7 +108,7 @@
             </div>
             <div class="card-body">
               <div class="listing-heading text-center">
-                <h4 class="text-primary"><%= homestay.name %></h4>
+                <a class="text-primary h4" href="../homestays/<%= homestay.id %>"><%= homestay.name %></a>
                 <p>
                   <i class="fas fa-map-marker text-secondary"></i><%= homestay.city %></p>
               </div>
@@ -123,7 +123,10 @@
               </div>
               <hr>
               <hr>
-              <a href="listing.html" class="btn btn-primary btn-block">More Info</a>
+              <a href="../homestays/<%= homestay.id %>" class="btn btn-primary btn-block">More Info</a>
+              <% if (user._id.equals(homestay.owner._id)) {%>
+                <!-- <a href="../homestays/delete/<%= homestay.id %>" class="btn btn-primary btn-block">Delete</a> -->
+              <% } %>
             </div>
           </div>
         </div>
