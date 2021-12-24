@@ -9,6 +9,18 @@ const Schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Homestay'
     },
+    phone: {
+        type: String,
+        required: true
+    },
+    people: {
+        type: Number,
+        required: true
+    },
+    note: {
+        type: String,
+        default: "none"
+    },
     services: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -22,7 +34,8 @@ const Schema = new mongoose.Schema({
         required: true
     },
     status: {
-        type: Number,
+        type: String,
+        enum: ["requested", "accepted", "checkin", "checkout", "declined"],
         required: true
     }
 },{
