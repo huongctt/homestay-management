@@ -5,6 +5,7 @@ const bodyParser = require("body-parser")
 
 const User = require('../models/user.js')
 const Homestay = require('../models/homestay.js')
+const Review = require('../models/review.js')
 const auth = require('../middleware/auth.js')
 
 const router = new express.Router()
@@ -78,8 +79,14 @@ router.get('/homestays/:id', auth, async (req, res) => {
             await owner.populate({
                 path: 'homestays', 
             }).execPopulate();
-            // console.log(owner.homestays)
-            res.render('homestay', {user: req.user, homestay: homestay, owner: owner})
+            const reviews = await Review.find({homestay: req.params.id});
+            for (var review of reviews) {
+                await review.populate({
+                    path: 'user', 
+                }).execPopulate();
+            }
+            reviews.sort((a,b) => b.createdAt - a.createdAt)
+            res.render('homestay', {user: req.user, homestay: homestay, owner: owner, reviews: reviews})
         }
 
     } catch(e) {

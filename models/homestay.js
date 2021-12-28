@@ -35,6 +35,7 @@ const Schema = new mongoose.Schema({
     pool: {
         type: Boolean
     }
+
 },{
     timestamps: true
 });

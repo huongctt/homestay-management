@@ -59,7 +59,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container">
       <a class="navbar-brand" href="/home">
-        <img src="../assets/img/logo.png" class="logo" alt="">
+        <img src="/assets/img/logo.png" class="logo" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
         <span class="navbar-toggler-icon"></span>
@@ -70,21 +70,11 @@
             <a class="nav-link" href="/home">Home</a>
           </li>
           <li class="nav-item mr-3">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item mr-3">
             <a class="nav-link" href="listings.html">Featured Listings</a>
           </li>
-          <% if (user.role == "homestay owner") { %>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Manage Homestay
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/homestays/new">New Homestay</a>
-                <a class="dropdown-item" href="/homestays/yourhomestays">Your Homestays</a>
-            </li>
-          <% } %>
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="/yourbooking">Your booking Listings</a>
+          </li>
         </ul>
 
         <ul class="navbar-nav ml-auto">
@@ -102,26 +92,30 @@
       <table class="table">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Homestay</th>
             <th scope="col">Phone</th>
             <th scope="col">Checkin</th>
             <th scope="col">Checkout</th>
             <th scope="col">Note</th>
             <th scope="col">Status</th>
+            <th scope="col">More</th>
           </tr>
         </thead>
         <tbody>
           <% for (var booking of bookings) { %>
             <% let i = 1 %>
             <tr>
-              <th scope="row"><%=i%></th>
-              <td><%=booking.homestay.name%></td>
+              <td><a href="/homestays/<%=booking.homestay._id%>"><%=booking.homestay.name%></a></td>
               <td><%=booking.phone%></td>
               <td><%=booking.checkin.toDateString()%></td>
               <td><%=booking.checkout.toDateString()%></td>
               <td><%=booking.note%></td>
               <td><%=booking.status%></td>
+              <% if (booking.status == "stayed") { %>
+                <td><a href="/reviews/<%=booking._id%>">Review</a></td>
+              <% } else{ %>
+                <td></td>
+              <% } %>
             </tr>
           <% i++ %>
           <% } %>
@@ -129,6 +123,8 @@
       </table>
     <% } %>
 </div>
+
+
 
   <!-- Footer -->
   <!-- <footer id="main-footer" class="py-4 bg-primary text-white text-center">

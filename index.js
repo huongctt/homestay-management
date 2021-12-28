@@ -17,10 +17,12 @@ const userRouter = require('./routers/userRouter.js')
 const homeRouter = require('./routers/homeRouter.js')
 const homestayRouter = require('./routers/homestayRouter.js')
 const bookRouter = require('./routers/bookRouter.js')
+const reviewRouter = require('./routers/reviewRouter.js')
 app.use(userRouter)
 app.use(homeRouter)
 app.use(homestayRouter)
 app.use(bookRouter)
+app.use(reviewRouter)
 // app.use(friendRouter)
 
 //view

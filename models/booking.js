@@ -35,7 +35,7 @@ const Schema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["requested", "accepted", "checkin", "checkout", "declined"],
+        enum: ["requested", "accepted", "stayed", "declined", "reviewed"],
         required: true
     }
 },{

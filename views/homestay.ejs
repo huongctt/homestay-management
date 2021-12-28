@@ -66,9 +66,6 @@
             <a class="nav-link" href="../home">Home</a>
           </li>
           <li class="nav-item mr-3">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
-          <li class="nav-item mr-3">
             <a class="nav-link" href="listings.html">Featured Listings</a>
           </li>
         <% if (user.role == "homestay owner") { %>
@@ -80,7 +77,17 @@
                 <a class="dropdown-item" href="../homestays/new">New Homestay</a>
                 <a class="dropdown-item" href="../homestays/yourhomestays">Your Homestays</a>
             </li>
+        <% } else { %>
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="../yourbooking">Your booking Listings</a>
+          </li>
         <% } %>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="../logout">
+              <i class="fas fa-user-plus"></i> Logout</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -177,10 +184,37 @@
 
           <!-- Description -->
           <div class="row mb-5">
+            <h4>Description</h4>
             <div class="col-md-12">
               <%= homestay.description %>
             </div>
           </div>
+          <br/>
+          
+          <!-- Review -->
+          <% if (reviews.length != 0) { %>
+            <h4>Reviews</h4>
+            <% for (var review of reviews) { %>
+            <div class="row mb-5">
+              <p class="text-info col-md-12"><%= review.user.username %>
+              <% if (review.rate >= 1) { %>
+                <span class="fa fa-star checked"></span>
+                <% if (review.rate >= 2) { %>
+                <span class="fa fa-star checked"></span>
+                <% if (review.rate >= 3) { %>
+                <span class="fa fa-star checked"></span>
+                <% if (review.rate >= 4) { %>
+                <span class="fa fa-star checked"></span>
+                <% if (review.rate >= 5) { %>
+                  <span class="fa fa-star checked"></span>
+              <% }}}}} %>
+            </p>
+              <div class="col-md-12">
+                <%= review.review %>
+              </div>
+            </div>
+            <% } %>
+          <% } %>
         </div>
         <div class="col-md-3">
             <div class="card mb-3">
@@ -215,46 +249,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Inquiry Modal -->
-  <div class="modal fade" id="inquiryModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
-          <button type="button" class="close" data-dismiss="modal">
-            <span>&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="property_name" class="col-form-label">Property:</label>
-              <input type="text" name="listing" class="form-control" value="45 Drivewood Cirlce" disabled>
-            </div>
-            <div class="form-group">
-              <label for="name" class="col-form-label">Name:</label>
-              <input type="text" name="name" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="email" class="col-form-label">Email:</label>
-              <input type="email" name="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="phone" class="col-form-label">Phone:</label>
-              <input type="text" name="phone" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="message" class="col-form-label">Message:</label>
-              <textarea name="message" class="form-control"></textarea>
-            </div>
-            <hr>
-            <input type="submit" value="Send" class="btn btn-block btn-secondary">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <footer id="main-footer" class="py-4 bg-primary text-white text-center">
     Copyright &copy;

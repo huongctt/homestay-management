@@ -32,7 +32,7 @@ router.post('/search', auth, async (req,res) => {
               $and: [{ checkin: { $lte: checkintime } }, { checkout: { $gte: checkouttime } }]
           },
       ],
-      status: {$in: ["accepted"]}
+      status: {$in: ["accepted", "stayed", "reviewed"]}
   })
   var unavailable = []
   for (var i = 0; i < booked.length; i++) {
@@ -60,19 +60,36 @@ router.get('/yourbooking', auth, async (req,res) => {
 
 router.get('/homestays/:id/bookinglist', auth, async (req,res) => {
   const homestay = await Homestay.findById(req.params.id)
+  //requested
   const requestedBookings = await Booking.find({homestay: req.params.id, status: "requested"})
   for (var i = 0; i < requestedBookings.length; i++){
     await requestedBookings[i].populate({
       path: 'user', 
     }).execPopulate();
   }
+  //accepted
   const acceptedBookings = await Booking.find({homestay: req.params.id, status: "accepted"})
   for (var i = 0; i < acceptedBookings.length; i++){
     await acceptedBookings[i].populate({
       path: 'user', 
     }).execPopulate();
   }
-  res.status(200).render('homestayBookingList', {user: req.user, homestay, requestedBookings, acceptedBookings} )
+  //declined
+  const declinedBookings = await Booking.find({homestay: req.params.id, status: "declined"})
+  for (var i = 0; i < declinedBookings.length; i++){
+    await declinedBookings[i].populate({
+      path: 'user', 
+    }).execPopulate();
+  }
+  //stayed
+  const stayedBookings = await Booking.find({homestay: req.params.id,status: {$in: [ "stayed", "reviewed"]}})
+  for (var i = 0; i < stayedBookings.length; i++){
+    await stayedBookings[i].populate({
+      path: 'user', 
+    }).execPopulate();
+  }
+
+  res.status(200).render('homestayBookingList', {user: req.user, homestay, requestedBookings, acceptedBookings, declinedBookings, stayedBookings} )
 })
 
 router.post('/books/:id', auth, async (req,res) => {
@@ -98,6 +115,13 @@ router.post('/books/:id/accept', auth, async (req,res) => {
 router.post('/books/:id/decline', auth, async (req,res) => {
   const booking = await Booking.findById(req.params.id)
   booking.status = "declined"
+  await booking.save()
+  res.redirect('back')
+})
+
+router.post('/books/:id/stay', auth, async (req,res) => {
+  const booking = await Booking.findById(req.params.id)
+  booking.status = "stayed"
   await booking.save()
   res.redirect('back')
 })
