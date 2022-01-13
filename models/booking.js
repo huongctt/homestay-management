@@ -37,6 +37,9 @@ const Schema = new mongoose.Schema({
         type: String,
         enum: ["requested", "accepted", "stayed", "declined", "reviewed"],
         required: true
+    },
+    money: {
+        type: Number
     }
 },{
     timestamps: true
