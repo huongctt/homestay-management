@@ -91,16 +91,16 @@
     <table class="table">
       <thead class="thead-light">
         <tr>
-          <th scope="col" class="text-center" style="background-color:rgb(3, 180, 169) !important;"><a href="../../homestays/<%=homestay._id%>/bookinglist">Requested List</a></th>
+          <th scope="col" class="text-center"><a href="../../homestays/<%=homestay._id%>/bookinglist">Requested List</a></th>
           <th scope="col" class="text-center"><a href="../../homestays/<%=homestay._id%>/acceptedlist">Accepted List</a></th>
           <th scope="col" class="text-center"><a href="../../homestays/<%=homestay._id%>/stayedlist">Stayed List</a></th>
-          <th scope="col" class="text-center"><a href="../../homestays/<%=homestay._id%>/declinedlist">Declined List</a></th>
+          <th scope="col" class="text-center" style="background-color:rgb(3, 180, 169) !important;"><a href="../../homestays/<%=homestay._id%>/declinedlist">Declined List</a></th>
         </tr>
       </thead>
     </table>
 
     <div class="mb-5 ">
-      <form method="GET" action="../../homestays/<%=homestay._id%>/bookinglist">
+      <form method="GET" action="../../homestays/<%=homestay._id%>/declinedlist">
         <div class="input-group">
           <input name="username" class="form-control rounded" placeholder="Name" type="text" style="width: 40% !important;"/>
           <select name="time" class="form-control form-selec" id="type">
@@ -112,44 +112,38 @@
         </div>
 			</form>
     </div>
-
-      <% if (requestedBookings.length != 0) { %>
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">User</th>
-              <th scope="col">Phone</th>
-              <th scope="col">People</th>
-              <th scope="col">Checkin</th>
-              <th scope="col">Checkout</th>
-              <th scope="col">Note</th>
-              <th scope="col" colspan="2">Accept/Decline</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for (var request of requestedBookings) { %>
-              <% var i = 1 %>
-              <tr>
-                <td><%=request.user.name%></td>
-                <td><%=request.phone%></td>
-                <td><%=request.people%></td>
-                <td><%=request.checkin.toDateString()%></td>
-                <td><%=request.checkout.toDateString()%></td>
-                <td><%=request.note%></td>
-                <td>
-                  <form action="../../books/<%=request._id%>/accept" method="POST"><input type="submit" value="Accept" class="btn btn-primary"/></form>
-                </td>
-                <td>
-                  <form action="../../books/<%=request._id%>/decline" method="POST"><input type="submit" value="Decline" class="btn btn-danger"/></form>
-                </td>
-              </tr>
-            
+      
+          <% if (declinedBookings.length != 0) { %>
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">User</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">People</th>
+                  <th scope="col">Checkin</th>
+                  <th scope="col">Checkout</th>
+                  <th scope="col">Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (var request of declinedBookings) { %>
+                  <% var i = 1 %>
+                  <tr>
+                    <td><%=request.user.name%></td>
+                    <td><%=request.phone%></td>
+                    <td><%=request.people%></td>
+                    <td><%=request.checkin.toDateString()%></td>
+                    <td><%=request.checkout.toDateString()%></td>
+                    <td><%=request.note%></td>
+                  </tr>
+                <% i++ %>
+                <% } %>
+              </tbody>
+            </table>
+            <% } else { %>
+              <p class="text-center">No Declined List here</p>
             <% } %>
-          </tbody>
-        </table>
-        <% } else { %>
-          <p class="text-center">No requested list here</p>
-        <% } %>
+
   </div>
 
   <!-- Footer -->

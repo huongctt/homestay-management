@@ -96,10 +96,15 @@
       </div>
     </div>
   </nav>
-
   <!-- Showcase -->
   <section id="showcase">
     <div class="container text-center">
+      <% if (user.role == "visitor" && bookings.length != 0) { %>
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Notice</strong> You have <%= bookings.length %> homestay to review. <a href="/yourbooking">Please click here to review</a>
+        </div>
+      <% } %>
       <div class="home-search p-5">
         <div class="overlay p-5">
           <h1 class="display-4 mb-4">
