@@ -97,6 +97,7 @@
             <th scope="col">Checkin</th>
             <th scope="col">Checkout</th>
             <th scope="col">Note</th>
+            <th scope="col">Money</th>
             <th scope="col">Status</th>
             <th scope="col">More</th>
           </tr>
@@ -110,6 +111,7 @@
               <td><%=booking.checkin.toDateString()%></td>
               <td><%=booking.checkout.toDateString()%></td>
               <td><%=booking.note%></td>
+              <td><%=booking.money%></td>
               <td><%=booking.status%></td>
               <% if (booking.status == "stayed") { %>
                 <td><a href="/reviews/<%=booking._id%>">Review</a></td>

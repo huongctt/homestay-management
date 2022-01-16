@@ -221,8 +221,8 @@
                 <!-- <img class="card-img-top" src="assets/img/realtors/kyle.jpg" alt="Seller of the month"> -->
                 <div class="card-body">
                   <h5 class="card-title" style ="text-align: justify !important;"><%= homestay.name %></h5>
-                  <h6 class="text-secondary" style ="text-align: justify !important;">Rate: 4.6 </h6>
-                  <h6 class="text-secondary" style ="text-align: justify !important;">Rentals: 53 </h6>
+                  <h6 class="text-secondary" style ="text-align: justify !important;">Rate: <%= averageRate %> </h6>
+                  <h6 class="text-secondary" style ="text-align: justify !important;">Guests: <%= totalGuests %> </h6>
                   <p class="text-secondary"></p>
                 </div>
               </div>
@@ -241,6 +241,7 @@
             </form>
             <a href="../homestays/<%= homestay.id %>/edit" class="btn btn-primary btn-block mt-4">Edit</a>
             <a href="../homestays/<%= homestay.id %>/bookinglist" class="btn btn-primary btn-block mt-4">Booking list</a>
+            <a href="../homestays/<%= homestay.id %>/statistics" class="btn btn-primary btn-block mt-4">Statistics</a>
           <% } else { %>
             <a href="../books/<%= homestay.id %>" class="btn btn-primary btn-block mt-4">Book</a>
           <% } %>
@@ -250,10 +251,7 @@
     </div>
   </section>
 
-  <footer id="main-footer" class="py-4 bg-primary text-white text-center">
-    Copyright &copy;
-    <span class="year"></span> HB Homestay
-  </footer>
+
 
   <script src="../assets/js/jquery-3.3.1.min.js "></script>
   <script src="../assets/js/bootstrap.bundle.min.js "></script>

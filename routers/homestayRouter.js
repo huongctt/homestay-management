@@ -6,7 +6,10 @@ const bodyParser = require("body-parser")
 const User = require('../models/user.js')
 const Homestay = require('../models/homestay.js')
 const Review = require('../models/review.js')
+const Booking = require('../models/booking.js')
 const auth = require('../middleware/auth.js')
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 const router = new express.Router()
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -80,13 +83,41 @@ router.get('/homestays/:id', auth, async (req, res) => {
                 path: 'homestays', 
             }).execPopulate();
             const reviews = await Review.find({homestay: req.params.id});
+            var totalStar = 0
+            var averageRate = 0
+            var totalGuests = 0
             for (var review of reviews) {
                 await review.populate({
                     path: 'user', 
                 }).execPopulate();
+                totalStar += review.rate
             }
+            if (reviews.length != 0){
+                averageRate = totalStar/reviews.length
+            }
+            const guests = await Booking.aggregate([
+                { $match: {
+                    homestay: ObjectId(req.params.id),
+                    status: {$in: [ "stayed", "reviewed"]}
+                  } 
+                },
+                {
+                  $group:
+                    {
+                      _id: { _id: ObjectId(req.params.id) },
+                      total: { $sum: "$people" }
+                    }
+                  }
+                ]
+            )
+            if (guests.length != 0){
+                totalGuests = guests[0].total
+            }
+            console.log(averageRate)
+            console.log(totalGuests)
+
             reviews.sort((a,b) => b.createdAt - a.createdAt)
-            res.render('homestay', {user: req.user, homestay: homestay, owner: owner, reviews: reviews})
+            res.render('homestay', {user: req.user, homestay: homestay, owner: owner, reviews: reviews, averageRate, totalGuests})
         }
 
     } catch(e) {

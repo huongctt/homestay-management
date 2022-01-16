@@ -17,13 +17,15 @@ const userRouter = require('./routers/userRouter.js')
 const homeRouter = require('./routers/homeRouter.js')
 const homestayRouter = require('./routers/homestayRouter.js')
 const bookRouter = require('./routers/bookRouter.js')
+const statisticsRouter = require('./routers/statisticsRouter.js')
 const reviewRouter = require('./routers/reviewRouter.js')
 app.use(userRouter)
 app.use(homeRouter)
 app.use(homestayRouter)
 app.use(bookRouter)
+app.use(statisticsRouter)
 app.use(reviewRouter)
-// app.use(friendRouter)
+
 
 //view
 const viewsPath = path.join(__dirname, './views')
