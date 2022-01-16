@@ -1,0 +1,115 @@
+.chart{
+  width: 600px;
+  height: 300px;
+  display: block;
+}
+
+.chart-quarter{
+  width: 300px;
+  height: 300px;
+  display: block;
+}
+
+.numbers{
+  color: rgb(82, 46, 150);
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 100%;
+  display: inline-block;
+  float: left;
+}
+
+.numbers li{
+  list-style: none;
+  height: 150px;
+  position: relative;
+  bottom: 145px;
+}
+
+.numbers span{
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  margin-left: 10px;
+}
+
+.bars{
+  color: rgb(32, 18, 109);
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  width: 500px;
+  height: 250px;
+  border-radius: 5px;
+}
+
+.bars li{
+  display: table-cell;
+  width: 50px;
+  height: 300px;
+  position: relative;
+}
+
+.bars span{
+  width: 100%;
+  position: absolute;
+  bottom: -30px;
+  text-align: center;
+}
+
+.bars .bar{
+  display: block;
+  background: rgb(129, 201, 230);
+  width: 15px;
+  position: absolute;
+  bottom: 0;
+  margin-left: 25px;
+  text-align: center;
+  box-shadow: 0 0 10px 0 rgb(208, 219, 241);
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+}
+
+.bars .bar-quarter{
+  display: block;
+  background: rgb(129, 201, 230);
+  width: 45px;
+  position: absolute;
+  bottom: 0;
+  margin-left: 25px;
+  text-align: center;
+  box-shadow: 0 0 10px 0 rgb(208, 219, 241);
+  transition: 0.5s;
+  transition-property: background, box-shadow;
+}
+
+.bars .bar:hover{
+  background: #55EFC4;
+  box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+  cursor: pointer;
+}
+
+.bars .bar:before{
+  color: rgb(110, 17, 138);
+  content: attr(data-money);
+  position: relative;
+  bottom: 20px;
+}
+
+.bars .bar-quarter:hover{
+  background: #36b38f;
+  box-shadow: 0 0 10px 0 rgba(85, 239, 196, 0.5);
+  cursor: pointer;
+}
+
+.bars .bar-quarter:before{
+  color: rgb(110, 17, 138);
+  content: attr(data-money);
+  position: relative;
+  bottom: 20px;
+}

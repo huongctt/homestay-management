@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../assets/css/all.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+  <!-- Custom -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/chart.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  <title>Hb Homestay</title>
+</head>
+
+<body>
+  <!-- Top Bar -->
+  <section id="top-bar" class="p-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <i class="fas fa-phone"></i> (617)-555-5555
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-envelope-open"></i> contact@hbhomestay.com
+        </div>
+        <div class="col-md-4">
+          <div class="social text-right">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-pinterest"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navbar -->
+  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../../home">
+        <img src="../../assets/img/logo.png" class="logo" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="../../home">Home</a>
+          </li>
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="listings.html">Featured Listings</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Manage Homestay
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../../homestays/new">New Homestay</a>
+                <a class="dropdown-item" href="../../homestays/yourhomestays">Your Homestays</a>
+            </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="../../logout">
+              <i class="fas fa-user-plus"></i> Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2 class="text-center mb-5 mt-5 text-info"><a class="text-info" href="../../homestays/<%=homestay._id%>" ><%= homestay.name %></a> -  Statistics</h2>
+
+    <div class="mb-5 mt-3">
+      <form method="GET" action="../../homestays/<%=homestay._id%>/statistics">
+        <div class="input-group">
+          <select name="type" class="form-selec" id="type" width=200px>
+            <% valuesType = ["Type", "Money", "Guests"] %>
+            <% for (var value of valuesType) { %>
+              <% if (value != type) { %>
+                <option value="<%=value%>"><%=value%></option>
+              <% } else { %>
+                <option value="<%=value%>" selected><%=value%></option>
+              <% } %>
+            <% } %>
+              
+          </select>
+          <select name="year" class="form-selec" id="type" width=200px>
+            <% values = ["None", "2020", "2021", "2022"] %>
+            <% for (var value of values) { %>
+              <% if (value != year) { %>
+                <option value="<%=value%>"><%=value%></option>
+              <% } else { %>
+                <option value="<%=value%>" selected><%=value%></option>
+              <% } %>
+            <% } %>
+              
+          </select>
+          <button class="btn btn-outline-primary">Apply</button>
+        </div>
+			</form>
+    </div>
+
+    <!-- Chart here-->
+    <div class="mychart">
+    <% if (total != 0) { %>
+    <div class="chart" style="margin: auto !important;">
+      <ul class="numbers">
+        <li><span><%= max %></span></li>
+        <li><span><%= max/2 %></span></li>
+        <li><span>0</span></li>
+      </ul>
+      <ul class="bars">
+      <% var tmp = 0 %>
+      <% var i = 1 %>
+      <% for (var money of list) { %>
+        <% if (money != 0 && money > 1000) { %>
+          <% tmp = money*100/max %>
+          <li><div class="bar" data-percentage="<%=tmp%>" data-money="<%=money/1000%>"></div class="ml-5"><span><%=i%></span></li>
+        <% } else if (money != 0) { %>
+          <% tmp = money*100/max %>
+            <li><div class="bar" data-percentage="<%=tmp%>" data-money="<%=money%>"></div class="ml-5"><span><%=i%></span></li>
+        <% } else { %>
+          <li><div class="bar" data-percentage="0" data-money="<%=money%>"></div ><span><%=i%></span></li>
+        <% } %>
+        <% i++ %>
+        <% } %>
+      </ul>
+    </div>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+    <div class="chart" style="margin: auto !important;">
+      <ul class="numbers">
+        <li><span><%= quarterMax %></span></li>
+        <li><span><%= quarterMax/2 %></span></li>
+        <li><span>0</span></li>
+      </ul>
+      <ul class="bars" style="width: 200px !important;">
+      <% tmp = 0 %>
+      <% i = 1 %>
+      <% for (var money of quarterList) { %>
+        <% if (money != 0 && money > 1000) { %>
+          <% tmp = money*100/quarterMax %>
+          <li><div class="bar-quarter" data-percentage="<%=tmp%>" data-money="<%=money/1000%>"></div class="ml-5"><span><%=i%></span></li>
+        <% } else if (money != 0) { %>
+          <% tmp = money*100/quarterMax %>
+          <li><div class="bar-quarter" data-percentage="<%=tmp%>" data-money="<%=money%>"></div class="ml-5"><span><%=i%></span></li>
+        <% } else { %>
+          <li><div class="bar-quarter" data-percentage="0" data-money="<%=money%>"></div ><span><%=i%></span></li>
+        <% } %>
+        <% i++ %>
+        <% } %>
+      </ul>
+
+    </div>
+  </br>
+  </br>
+  </br>
+  <h4 class="text-center"> Total : <%= total %></h4>
+    <% } %>
+    <!--chart end-->
+
+    <script type="text/javascript">
+    $(function(){
+      $('.bars li .bar').each(function(key, bar){
+        var percentage = $(this).data('percentage');
+        $(this).animate({
+          'height' : percentage + '%'
+        },1000);
+      });
+    });
+    </script>
+    <script type="text/javascript">
+      $(function(){
+        $('.bars li .bar-quarter').each(function(key, bar){
+          var percentage = $(this).data('percentage');
+          $(this).animate({
+            'height' : percentage + '%'
+          },1000);
+        });
+      });
+      </script>
+
+    <!-- end here-->
+      
+    </div>  
+  </div>
+
+  <!-- Footer -->
+  <!-- <footer id="main-footer" class="py-4 bg-primary text-white text-center">
+    Copyright &copy;
+    <span class="year"></span> HB Homestay
+  </footer> -->
+
+  <script src="../../assets/js/bootstrap.bundle.min.js "></script>
+  <script src="../../assets/js/main.js "></script>
+</body>
+
+</html>
