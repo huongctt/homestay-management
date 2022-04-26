@@ -1,12 +1,12 @@
 # homestay-management
 
-1. Biểu đồ usecase tổng quát
+### 1. Biểu đồ usecase tổng quát
 
 ![image](https://user-images.githubusercontent.com/80813788/165202042-5a69ed62-a28a-4423-ad9e-52437369a2e6.png)
 
-2. Kết quả
+### 2. Kết quả
 
-2.1 Phía khách du lịch
+#### 2.1 Phía khách du lịch
 - Tìm kiếm homestay
 
 ![image](https://user-images.githubusercontent.com/80813788/165202675-fab6bbe7-cc07-41e3-918c-fda380c3ad02.png)
@@ -17,7 +17,7 @@
 ![image](https://user-images.githubusercontent.com/80813788/165202794-2d3397ee-3372-439f-92aa-73fa9b9d2307.png)
 ![image](https://user-images.githubusercontent.com/80813788/165202805-68b60bd9-3e50-4f41-9af0-59119377bee5.png)
 
-2.2. Phía chủ homestay
+#### 2.2. Phía chủ homestay
 
 - Tạo/sửa/xóa homestay
 
